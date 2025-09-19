@@ -10,6 +10,7 @@ dotenv.config({ path });
 
 const ENV_SCHEMA = z.object({
   PORT: z.coerce.number(),
+  DISCORD_WEBHOOK: z.string(),
 });
 
 const { data, error } = ENV_SCHEMA.safeParse(process.env);
