@@ -1,4 +1,4 @@
-import { Message, MessageHandler } from "../../shared/message-bus";
+import { IMessage, IMessageHandler } from "../../shared/message-bus";
 import { WebhookService } from "./abstractions/webhook-service";
 
 interface Props {
@@ -7,17 +7,17 @@ interface Props {
   updated_hotline: string;
 }
 
-export class CreateReportCommand implements Message {
+export class CreateReportCommand implements IMessage {
   result?: void;
   constructor(public readonly props: Props) {}
 }
 
 export class CreateReportHandler
-  implements MessageHandler<CreateReportCommand>
+  implements IMessageHandler<CreateReportCommand>
 {
   constructor(private readonly webhookService: WebhookService) {}
 
   async handle({ props }: CreateReportCommand): Promise<void> {
-    await this.webhookService.send(props);
+    await this.webhookService.sendHotlineReport(props);
   }
 }

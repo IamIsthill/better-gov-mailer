@@ -5,5 +5,5 @@ export interface WebhookData {
 }
 
 export interface WebhookService {
-  send(data: WebhookData): Promise<void>;
+  sendHotlineReport(data: WebhookData): Promise<void>;
 }

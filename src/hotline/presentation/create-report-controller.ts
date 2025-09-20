@@ -1,5 +1,5 @@
 import { NextFunction, Response } from "express";
-import { MessageBus } from "../../shared/message-bus";
+import { IMessageBus } from "../../shared/message-bus";
 import z from "zod";
 import { TypedBody } from "zodware";
 import { CreateReportCommand } from "../application/create-report-handler";
@@ -13,7 +13,7 @@ export const createReportValidator = z
   .strict();
 
 export class CreateReportController {
-  constructor(private readonly messageBus: MessageBus) {}
+  constructor(private readonly messageBus: IMessageBus) {}
 
   async handle(
     req: TypedBody<typeof createReportValidator>,

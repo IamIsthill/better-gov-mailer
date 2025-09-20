@@ -1,13 +1,22 @@
-export interface Message<R = any> {
+export interface IMessage<R = any> {
   result?: R;
 }
 
-export interface MessageHandler<M extends Message> {
+export interface IMessageHandler<M extends IMessage> {
   handle(message: M): Promise<M["result"]>;
 }
 
-export class MessageBus {
-  private handlers = new Map<Function, MessageHandler<Message>>();
+export interface IMessageBus {
+  register<M extends IMessage>(
+    message: new (...args: any[]) => M,
+    handler: IMessageHandler<M>
+  ): void;
+
+  run<M extends IMessage>(message: M): Promise<M["result"]>;
+}
+
+export class MessageBus implements IMessageBus {
+  private handlers = new Map<Function, IMessageHandler<IMessage>>();
   private static instance: MessageBus;
 
   static getInstance(): MessageBus {
@@ -16,14 +25,14 @@ export class MessageBus {
     }
     return MessageBus.instance;
   }
-  register<M extends Message>(
+  register<M extends IMessage>(
     message: new (...args: any[]) => M,
-    handler: MessageHandler<M>
+    handler: IMessageHandler<M>
   ) {
     this.handlers.set(message, handler);
   }
 
-  async run<M extends Message>(message: M): Promise<M["result"]> {
+  async run<M extends IMessage>(message: M): Promise<M["result"]> {
     const handler = this.handlers.get(message.constructor);
     if (!handler)
       throw new Error(`No handler registered for ${message.constructor.name}`);
