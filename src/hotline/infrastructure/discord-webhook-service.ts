@@ -17,8 +17,9 @@ export class DiscordWebhookService implements WebhookService {
         embeds: [embed],
       });
     } catch (error) {
-      if (error instanceof Error) {
-        throw new AppError("Failed to send to Discord", 502, error);
+      if (error instanceof axios.AxiosError && error.response?.status === 429) {
+        const retry = error.response.headers["retry-after"];
+        throw new AppError(retry ? "Retry after " + retry : "", 429, error);
       } else {
         throw new AppError("Failed to send to Discord", 502);
       }
