@@ -1,5 +1,5 @@
-import { IMessage, IMessageHandler } from "../../shared/message-bus";
-import { WebhookService } from "./abstractions/webhook-service";
+import { IMessage, IMessageHandler } from "@/shared/message-bus/index.ts";
+import { WebhookService } from "@/hotline/application/abstractions/webhook-service.ts";
 
 interface Props {
   organization: string;

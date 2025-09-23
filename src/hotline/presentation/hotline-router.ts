@@ -3,7 +3,7 @@ import validateRequest from "zodware";
 import {
   CreateReportController,
   createReportValidator,
-} from "./create-report-controller";
+} from "@/hotline/presentation/create-report-controller.ts";
 
 export class HotlineRouter {
   public readonly router: Router;
@@ -16,7 +16,7 @@ export class HotlineRouter {
   private setupRoutes() {
     this.router.post(
       "/hotlines/outdated",
-      validateRequest({ body: createReportValidator }),
+      validateRequest.default({ body: createReportValidator }),
       this.createReportController.handle.bind(this.createReportController)
     );
   }

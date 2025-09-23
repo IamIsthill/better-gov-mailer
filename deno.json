@@ -1,0 +1,10 @@
+{
+  "tasks": {
+    "dev": "deno run --allow-net --allow-env ./src/index.ts"
+  },
+  "imports": {
+    "@/": "./src/",
+    "hotline": "./src/hotline/index.ts"
+  },
+  "nodeModulesDir": "auto"
+}

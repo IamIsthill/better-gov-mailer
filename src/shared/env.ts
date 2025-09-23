@@ -1,6 +1,7 @@
 import { z } from "zod";
 import dotenv from "dotenv";
-import { resolve } from "path";
+import { resolve } from "node:path";
+import process from "node:process";
 
 // Determine environment and load corresponding env file
 const env = process.env.NODE_ENV || "production";

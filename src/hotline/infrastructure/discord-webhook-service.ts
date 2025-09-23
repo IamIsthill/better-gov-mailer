@@ -1,9 +1,9 @@
-import { AppError } from "../../shared/app-error";
-import ENVVARS from "../../shared/env";
+import { AppError } from "@/shared/app-error.ts";
+import ENVVARS from "@/shared/env.ts";
 import {
   WebhookData,
   WebhookService,
-} from "../application/abstractions/webhook-service";
+} from "@/hotline/application/abstractions/webhook-service.ts";
 import axios from "axios";
 
 export class DiscordWebhookService implements WebhookService {

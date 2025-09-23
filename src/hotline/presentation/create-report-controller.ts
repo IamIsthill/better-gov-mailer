@@ -1,8 +1,8 @@
 import { NextFunction, Response } from "express";
-import { IMessageBus } from "../../shared/message-bus";
+import { IMessageBus } from "@/shared/message-bus/index.ts";
 import z from "zod";
 import { TypedBody } from "zodware";
-import { CreateReportCommand } from "../application/create-report-handler";
+import { CreateReportCommand } from "@/hotline/application/create-report-handler.ts";
 
 export const createReportValidator = z
   .object({

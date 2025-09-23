@@ -1,6 +1,6 @@
 import CORS, { CorsOptions } from "cors";
-import ENVVARS from "../env";
-import { AppError } from "../app-error";
+import ENVVARS from "@/shared/env.ts";
+import { AppError } from "@/shared/app-error.ts";
 
 export function cors() {
   const origins = ENVVARS.WHITELIST;

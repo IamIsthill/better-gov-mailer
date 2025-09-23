@@ -1,11 +1,11 @@
-import { MessageBus } from "../shared/message-bus";
+import { MessageBus } from "@/shared/message-bus/index.ts";
 import {
   CreateReportCommand,
   CreateReportHandler,
-} from "./application/create-report-handler";
-import { DiscordWebhookService } from "./infrastructure/discord-webhook-service";
-import { CreateReportController } from "./presentation/create-report-controller";
-import { HotlineRouter } from "./presentation/hotline-router";
+} from "@/hotline/application/create-report-handler.ts";
+import { DiscordWebhookService } from "@/hotline/infrastructure/discord-webhook-service.ts";
+import { CreateReportController } from "@/hotline/presentation/create-report-controller.ts";
+import { HotlineRouter } from "@/hotline/presentation/hotline-router.ts";
 
 export function createHotlineFeature() {
   const bus = MessageBus.getInstance();

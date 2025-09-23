@@ -1,11 +1,11 @@
 import express from "express";
-import ENVVARS from "./shared/env";
-import { errorHandler } from "./shared/middleware/error-handler";
-import { createHotlineFeature } from "./hotline";
 import helmet from "helmet";
-import { cors } from "./shared/middleware/cors";
+import ENVVARS from "@/shared/env.ts";
+import { errorHandler } from "@/shared/middleware/error-handler.ts";
+import { createHotlineFeature } from "hotline";
+import { cors } from "@/shared/middleware/cors.ts";
 
-async function bootstrap() {
+function bootstrap() {
   const app = express();
   const hotlineFeature = createHotlineFeature();
 
