@@ -12,7 +12,7 @@ export class DiscordWebhookService implements WebhookService {
   async sendHotlineReport(data: WebhookData): Promise<void> {
     try {
       const embed = this.createHotlineReport(data);
-      await axios.post(this.useProxy(this.url), {
+      await axios.post(this.url, {
         content: "",
         embeds: [embed],
       });
@@ -38,11 +38,5 @@ export class DiscordWebhookService implements WebhookService {
       timestamp: new Date().toISOString(),
       footer: { text: "BetterGovMailer" },
     };
-  }
-
-  private useProxy(destination: string) {
-    const url = new URL(this.url);
-    url.searchParams.set("url", destination);
-    return url.toString();
   }
 }
