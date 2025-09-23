@@ -1,23 +1,23 @@
-FROM node:22-alpine AS builder
+# Use official Deno image
+FROM denoland/deno:alpine
 
+# Set working directory
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm ci
+# Copy dependencies first (deno.json + lockfile)
+COPY deno.json ./
+COPY deno.lock ./
 
-COPY . .
-RUN npm run build
+# Copy source code
+COPY ./src ./src
 
-FROM node:18-alpine AS runtime
+# Cache dependencies
+RUN deno cache ./src/index.ts
 
-WORKDIR /app
-
-COPY --from=builder /app/dist ./dist
-
-COPY --from=builder /app/package*.json ./
-
-RUN npm ci --omit=dev
-
+# Expose port
 EXPOSE 3000
 
-CMD ["node", "dist/index.js"]
+ENV NODE_ENV=production
+
+# Run the app
+CMD ["deno", "run", "--allow-net", "--allow-env", "./src/index.ts"]
