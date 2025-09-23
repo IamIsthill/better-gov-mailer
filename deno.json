@@ -1,10 +1,17 @@
 {
   "tasks": {
-    "dev": "deno run --allow-net --allow-env ./src/index.ts"
+    "dev": "NODE_ENV=development  deno run --allow-net --allow-env --watch ./src/index.ts"
   },
   "imports": {
     "@/": "./src/",
-    "hotline": "./src/hotline/index.ts"
+    "hotline": "./src/hotline/index.ts",
+    "helmet": "npm:helmet",
+    "express": "npm:express",
+    "dotenv": "npm:dotenv",
+    "cors": "npm:cors",
+    "zod": "npm:zod",
+    "zodware": "npm:zodware",
+    "axios": "npm:axios"
   },
   "nodeModulesDir": "auto"
 }
